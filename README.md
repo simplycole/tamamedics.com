@@ -62,7 +62,7 @@ Node.js 22.12 or newer is required.
 
 ```sh
 npm install
-npm run dev
+npm run dev -- --background
 ```
 
 The development server prints its local URL when it starts.
@@ -89,6 +89,8 @@ Astro writes the generated static site to `dist/`.
 ## Research Standards
 
 Technical claims should be evidence-aware, reproducible where possible, and clear about uncertainty. TamaMedics uses the following confidence terminology:
+
+See [docs/research-methodology.md](docs/research-methodology.md) for the concise evidence, reproduction, firmware-handling, and hardware-safety workflow.
 
 - **Confirmed** — Supported by direct, repeatable evidence
 - **Observed** — Directly seen or measured but not yet fully established

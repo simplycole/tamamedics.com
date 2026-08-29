@@ -1,6 +1,6 @@
 ---
-interface Props { title:string; description:string; href:string; code?:string; accent?:'pink'|'cyan'|'violet'|'lcd'; action?:string; }
+interface Props { title:string; description:string; href?:string; code?:string; accent?:'pink'|'cyan'|'violet'|'lcd'; action?:string; }
 const { title, description, href, code='DIR', accent='pink', action='Open directory' } = Astro.props;
 ---
-<a class:list={['card', accent]} href={href}><span class="technical-label">[{code}]</span><h3>{title}</h3><p>{description}</p><span class="arrow" aria-hidden="true">{action} →</span></a>
-<style>.cyan{--accent:var(--tm-cyan)}.violet{--accent:var(--tm-violet)}.lcd{--accent:var(--tm-lcd)}.pink{--accent:var(--tm-pink)}.technical-label{color:var(--accent)}.arrow{color:var(--accent)!important}</style>
+{href ? <a class:list={['card', accent]} href={href}><span class="technical-label">[{code}]</span><h3>{title}</h3><p>{description}</p><span class="arrow">{action} <span aria-hidden="true">→</span></span></a> : <article class:list={['card','card-static',accent]}><span class="technical-label">[{code}]</span><h3>{title}</h3><p>{description}</p><span class="arrow">{action}</span></article>}
+<style>.cyan{--accent:var(--tm-cyan)}.violet{--accent:var(--tm-violet)}.lcd{--accent:var(--tm-lcd)}.pink{--accent:var(--tm-pink)}.technical-label{color:var(--accent)}.arrow{color:var(--accent)!important}.card-static{box-shadow:none}.card-static:hover{transform:none;border-color:var(--tm-border-soft);box-shadow:none}</style>

@@ -1,0 +1,34 @@
+name: Research observation
+description: Share a reproducible hardware, firmware, or emulator observation.
+title: "[Research]: "
+labels: [research]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for documenting your finding. Do not attach copyrighted firmware; hashes and dump metadata are welcome."
+  - type: input
+    id: device
+    attributes: { label: Device, description: Include model and board/firmware revision if known. }
+    validations: { required: true }
+  - type: textarea
+    id: observation
+    attributes: { label: Observation, description: Separate what you directly observed from what you infer. }
+    validations: { required: true }
+  - type: textarea
+    id: method
+    attributes: { label: Method and tools, description: Explain settings, steps, evidence, photos, and any relevant firmware hash. }
+    validations: { required: true }
+  - type: dropdown
+    id: confidence
+    attributes: { label: Confidence, options: [Observed, Community Reported, Unverified, Researching] }
+    validations: { required: true }
+  - type: textarea
+    id: reproduction
+    attributes: { label: Reproducibility and limits, description: Say whether it was repeated and what remains uncertain. }
+  - type: checkboxes
+    id: firmware
+    attributes:
+      label: Firmware and privacy check
+      options:
+        - label: I have not attached copyrighted firmware and have removed privacy-sensitive information.
+          required: true

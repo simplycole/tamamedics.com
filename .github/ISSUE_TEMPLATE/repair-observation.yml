@@ -1,0 +1,28 @@
+name: Repair observation
+description: Document a diagnosis, repair, and outcome.
+title: "[Repair]: "
+labels: [repair]
+body:
+  - type: input
+    id: device
+    attributes: { label: Device, description: Include model and board revision if known. }
+    validations: { required: true }
+  - type: textarea
+    id: symptoms
+    attributes: { label: Symptoms and diagnosis }
+    validations: { required: true }
+  - type: textarea
+    id: repair
+    attributes: { label: Repair performed, description: Include tools, materials, measurements, and safety caveats. }
+    validations: { required: true }
+  - type: textarea
+    id: result
+    attributes: { label: Result and evidence, description: Include repeat testing or photos when useful. }
+    validations: { required: true }
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed personal, account, serial, and unrelated identifying information where privacy-sensitive.
+          required: true

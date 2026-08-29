@@ -1,0 +1,5 @@
+---
+import { getCollection, render } from 'astro:content'; import CollectionEntryLayout from '../../layouts/CollectionEntryLayout.astro';
+export async function getStaticPaths(){return (await getCollection('lab-notes')).map(entry=>({params:{slug:entry.id.replace(/\.(md|mdx)$/,'')},props:{entry}}));} const { entry }=Astro.props; const { Content }=await render(entry);
+---
+<CollectionEntryLayout title={entry.data.title} description={entry.data.summary} section="Lab Notes" sectionHref="/lab-notes/" status={entry.data.status}><Content /></CollectionEntryLayout>

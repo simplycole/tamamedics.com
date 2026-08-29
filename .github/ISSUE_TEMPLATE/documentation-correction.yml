@@ -1,0 +1,21 @@
+name: Documentation correction
+description: Correct a factual or technical problem in TamaMedics documentation.
+title: "[Docs]: "
+labels: [documentation]
+body:
+  - type: input
+    id: location
+    attributes: { label: Affected URL or file }
+    validations: { required: true }
+  - type: textarea
+    id: incorrect
+    attributes: { label: What is incorrect? }
+    validations: { required: true }
+  - type: textarea
+    id: correction
+    attributes: { label: Proposed correction }
+    validations: { required: true }
+  - type: textarea
+    id: evidence
+    attributes: { label: Source or evidence, description: Link or describe the evidence and its limits. }
+    validations: { required: true }

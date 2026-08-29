@@ -5,6 +5,8 @@ body { margin: 0; min-width: 320px; background: radial-gradient(circle at 76% 3%
 body::before { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .1; z-index: 10; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.035) 4px); }
 a { color: var(--tm-cyan); text-decoration-thickness: 1px; text-underline-offset: .2em; } a:hover { color: var(--tm-pink-bright); }
 img { max-width: 100%; height: auto; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.hash, .technical-value { overflow-wrap: anywhere; font-family: var(--font-mono); }
 :focus-visible { outline: 3px solid var(--tm-cyan); outline-offset: 4px; border-radius: var(--radius-sm); }
 .container { width: min(1180px, calc(100% - 2rem)); margin-inline: auto; }
 .page-shell { min-height: 68vh; padding-block: var(--space-7) var(--space-8); }
@@ -30,3 +32,14 @@ p { color: var(--tm-text-muted); } .lead { max-width: 720px; font-size: clamp(1.
 @media (max-width: 800px) { .card-grid { grid-template-columns: 1fr 1fr; } .section-heading{align-items:start;flex-direction:column} }
 @media (max-width: 560px) { .card-grid { grid-template-columns: 1fr; } .page-shell { padding-top: var(--space-6); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+@media print {
+  :root { color-scheme: light; }
+  body { background: #fff !important; color: #111 !important; font-size: 11pt; }
+  body::before, .site-header, footer, .toc, .button-row, .actions { display: none !important; }
+  .container, .technical-shell { width: 100% !important; max-width: none !important; }
+  p, li, dd { color: #222 !important; }
+  a { color: #111 !important; text-decoration: underline; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .8em; overflow-wrap: anywhere; }
+  h1, h2, h3 { color: #000 !important; break-after: avoid; }
+  table, figure, pre, .callout { break-inside: avoid; }
+}

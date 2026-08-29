@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
 const departments = [
   ['Clinic','Repair guides, diagnostics, teardown notes, and common hardware failures.','/clinic/','CLN','pink'],
   ['Research Lab','Firmware analysis, board mapping, and preservation research.','/research/','R&D','cyan'],
@@ -12,6 +13,7 @@ const departments = [
   ['Downloads','Open-source utilities, templates, scripts, and research aids.','/downloads/','GET','lcd'],
   ['Contributing','Help document and preserve virtual-pet hardware.','/contributing/','COM','violet'],
 ] as const;
+const [featuredProject] = await getCollection('research');
 ---
 <BaseLayout title="TamaMedics — Tamagotchi Repair, Research & Preservation">
   <div class="container page-shell home-shell">
@@ -27,7 +29,7 @@ const departments = [
         <div class="screw one" aria-hidden="true"></div><div class="screw two" aria-hidden="true"></div>
         <header><span>TM-DIAG/01</span><b>Diagnostic unit</b><span>Service mode</span></header>
         <div class="station-body">
-          <div class="mascot-well"><span class="scan-label">Patient scan</span><img src="/tamamedics-icon-square.png" width="220" height="220" alt="TamaMedics virtual pet medic mascot" /><i aria-hidden="true"></i></div>
+          <div class="mascot-well"><span class="scan-label">Patient scan</span><img src="/favicon-512.png" width="220" height="220" alt="TamaMedics virtual pet medic mascot" /><i aria-hidden="true"></i></div>
           <dl><div><dt>Patient</dt><dd>Virtual pet</dd></div><div><dt>Intake</dt><dd>Ready</dd></div><div><dt>Archive link</dt><dd>Online</dd></div></dl>
         </div>
         <footer><span><i></i>Power</span><span><i></i>Link</span><span><i></i>Archive</span><b>Patient ready</b></footer>
@@ -36,7 +38,7 @@ const departments = [
 
     <section class="status-strip" aria-label="System status"><dl><div><dt>System</dt><dd>Online</dd></div><div><dt>Archive</dt><dd>Building</dd></div><div><dt>Research</dt><dd>Active</dd></div><div><dt>Patch policy</dt><dd>Deltas only</dd></div></dl></section>
 
-    <section class="section-block" aria-labelledby="featured-project"><div class="section-heading"><div><p class="eyebrow">Current investigation // Case 001</p><h2 id="featured-project">On the research bench.</h2></div><p>Our first open case documents what is known, what is provisional, and what still needs careful verification.</p></div><ProjectCard /></section>
+    <section class="section-block" aria-labelledby="featured-project"><div class="section-heading"><div><p class="eyebrow">Current investigation // Case 001</p><h2 id="featured-project">On the research bench.</h2></div><p>Our first open case documents what is known, what is provisional, and what still needs careful verification.</p></div>{featuredProject && <ProjectCard {...featuredProject.data} />}</section>
 
     <section class="section-block directory" aria-labelledby="directories"><div class="directory-intro"><p class="eyebrow">Clinic directory</p><h2 id="directories">Where do you want to start?</h2><p>Follow a fault into the clinic, inspect an active case, or browse the growing technical archive.</p><span class="directory-id">DIRECTORY / REV. 01</span></div><div class="department-grid">{departments.map(([title,description,href,code,accent]) => <FeatureCard {title} {description} {href} {code} {accent} />)}</div></section>
 

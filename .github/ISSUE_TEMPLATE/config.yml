@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: TamaMedics contribution guide
+    url: https://tamamedics.com/contributing/
+    about: Review evidence, privacy, and firmware-handling guidance before submitting.
