@@ -1,7 +1,7 @@
 ---
-interface Props { status: 'active'|'confirmed'|'observed'|'community'|'unverified'|'planned'|'archived'; label?: string; }
+interface Props { status: 'active'|'confirmed'|'observed'|'community'|'unverified'|'researching'|'planned'|'archived'; label?: string; }
 const { status, label } = Astro.props;
-const labels = { active:'Active research',confirmed:'Confirmed',observed:'Observed',community:'Community reported',unverified:'Unverified',planned:'Planned',archived:'Archived' };
+const labels = { active:'Active research',confirmed:'Confirmed',observed:'Observed',community:'Community reported',unverified:'Unverified',researching:'Researching',planned:'Planned',archived:'Archived' };
 ---
 <span class:list={['badge', status]}><i aria-hidden="true"></i>{label ?? labels[status]}</span>
-<style>.badge{display:inline-flex;align-items:center;gap:.4rem;width:fit-content;padding:.3rem .58rem;border:1px solid currentColor;border-radius:var(--radius-pill);color:var(--tm-text-muted);font:700 .67rem var(--font-mono);letter-spacing:.04em;text-transform:uppercase}i{width:6px;height:6px;border-radius:50%;background:currentColor}.active,.confirmed{color:var(--tm-success)}.observed{color:var(--tm-cyan)}.community,.planned{color:var(--tm-violet)}.unverified{color:var(--tm-warning)}.archived{color:var(--tm-text-muted)}</style>
+<style>.badge{display:inline-flex;align-items:center;gap:.4rem;width:fit-content;padding:.3rem .58rem;border:1px solid currentColor;border-radius:var(--radius-pill);color:var(--tm-text-muted);font:700 .67rem var(--font-mono);letter-spacing:.04em;text-transform:uppercase}i{width:6px;height:6px;border-radius:50%;background:currentColor}.active,.confirmed{color:var(--tm-success)}.observed{color:var(--tm-cyan)}.community,.planned{color:var(--tm-violet)}.unverified,.researching{color:var(--tm-warning)}.archived{color:var(--tm-text-muted)}</style>

@@ -1,0 +1,204 @@
+---
+title: Tamagotchi Plus Color English Firmware Research
+slug: plus-color-english-firmware
+summary: Active research into safely dumping, understanding, emulating, translating, patching, and eventually programming Tamagotchi Plus Color firmware.
+status: active
+projectId: TM-RP-001
+device: Tamagotchi Plus Color
+category: Firmware / Hardware Preservation
+confidence: researching
+tags:
+  - firmware
+  - preservation
+  - emulation
+  - translation
+---
+import Callout from '../../components/Callout.astro';
+
+<section id="case-summary">
+## Project Summary
+
+Research Project #001 investigates a safe, reproducible path for understanding and translating Tamagotchi Plus Color firmware. The work begins with preservation: identify the exact device, obtain verified read-only dumps, understand the firmware structure, validate changes away from hardware, and document every assumption.
+
+This is active research, not a finished patch release. TamaMedics is not claiming a verified English firmware release or a hardware programming procedure.
+</section>
+
+<section id="case-status">
+## Current Status
+
+<Callout variant="status">
+The current phase is **Architecture & Flash Identification**. A verified physical-hardware dump method is the next phase; hardware writing is not yet established.
+</Callout>
+
+<div class="phase-grid">
+  <div><strong>Current phase</strong>Architecture & Flash Identification</div>
+  <div><strong>Next phase</strong>Verified Hardware Dump Methodology</div>
+  <div><strong>Planned</strong>Revision catalog, text mapping, translation tooling, and patch validation</div>
+</div>
+</section>
+
+<section id="case-goals">
+## Goals
+
+- Identify and distinguish firmware revisions.
+- Establish a repeatable, read-only firmware dump methodology.
+- Validate dumps through byte comparison, checksums, and emulator behavior.
+- Map firmware structure, including text, font, and resource storage.
+- Produce a reproducible translation workflow.
+- Develop non-destructive patching and validation procedures.
+- Distribute legal patch/delta files and tools instead of full firmware images.
+- Document possible hardware programming approaches as evidence permits.
+</section>
+
+<section id="case-known">
+## What We Know
+
+The labels below describe the strength and source of each statement. Emulator evidence is not presented as proof of every physical board implementation.
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th scope="col">Evidence</th><th scope="col">Current finding</th></tr></thead>
+  <tbody>
+    <tr><td>Observed</td><td>TamaEmu models the Plus Color with an Epson S1C33-family CPU architecture and an approximate 20 MHz clock.</td></tr>
+    <tr><td>Observed</td><td>Current emulator research models approximately 4 MiB / 32 Mbit of parallel NOR firmware storage.</td></tr>
+    <tr><td>Observed</td><td>The modeled flash uses an AMD-style NOR command interface, manufacturer ID <code>0x0001</code>, device ID <code>0x22F6</code>, and 29LV320DT-style geometry.</td></tr>
+    <tr><td>Observed</td><td>The modeled geometry is top-boot style: standard large sectors with smaller upper boot sectors.</td></tr>
+    <tr><td>Researching</td><td>Firmware builds may differ, so any future patch must be tied to an exact verified revision or hash.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<Callout variant="evidence">
+“Observed” means seen in hardware, software, emulator behavior, or source material, but not yet fully generalized. These architecture and flash details are current emulator evidence and are not yet hardware-verified across Plus Color board revisions.
+</Callout>
+</section>
+
+<section id="case-unknown">
+## What We Do Not Yet Know
+
+- The exact flash package fitted to every Plus Color board revision.
+- Whether all board revisions use identical NOR devices.
+- The safest practical in-circuit programming method.
+- Whether debug or factory interfaces can support practical flash programming.
+- The complete firmware revision matrix.
+- Exact patch compatibility across revisions.
+- A hardware-verified pinout or programming fixture.
+</section>
+
+<section id="case-architecture">
+## Hardware / Architecture Notes
+
+TamaEmu provides a useful working model: an Epson S1C33-family CPU at approximately 20 MHz and a 32 Mbit parallel NOR device with an AMD-style command interface. The modeled identifiers are <code>0x0001</code> and <code>0x22F6</code>, with 29LV320DT-style, top-boot geometry.
+
+These details guide questions and emulator experiments. They must not be treated as a universal bill of materials, pinout, or proof of electrical compatibility with physical hardware. Package markings, voltage requirements, board routing, and revision differences remain under investigation.
+</section>
+
+<section id="case-workflow">
+## Firmware Preservation Workflow
+
+This is the safety-oriented workflow the project intends to validate; it is not a claim that every step has already been completed on physical hardware.
+
+1. Identify the exact device and board revision.
+2. Photograph the board and all IC markings.
+3. Read firmware without issuing a write or erase command.
+4. Create multiple independent dumps.
+5. Verify the exact file size.
+6. Compare every dump byte-for-byte.
+7. Generate SHA-256 hashes.
+8. Preserve an untouched original dump privately.
+9. Test a copy with emulator tooling where applicable.
+10. Modify working copies only.
+11. Build a patch or binary delta.
+12. Validate the patched image and its expected base hash.
+13. Program hardware only after the method and image are verified.
+14. Read back and verify programmed contents.
+</section>
+
+<section id="case-patch-strategy">
+## Patch Strategy
+
+TamaMedics intends to publish BPS or xdelta patches, IPS where technically appropriate, scripts, checksum files, documentation, and open-source tooling. It will not distribute copyrighted full Bandai firmware images.
+
+Every patch must identify its compatible firmware revision through an exact cryptographic hash. Tools should reject unexpected input rather than guessing compatibility.
+
+<Callout variant="warning" label="Patch warning">
+**NEVER APPLY A PATCH TO AN UNVERIFIED FIRMWARE IMAGE.** A matching filename or device shell is not proof of compatibility.
+</Callout>
+</section>
+
+<section id="case-safety">
+## Safety Principles
+
+<Callout variant="safety">
+- Preserve original firmware before editing.
+- Verify the model, board, firmware revision, and checksums.
+- Never write an unknown image to hardware.
+- Do not assume emulator compatibility guarantees hardware safety.
+- Research voltage, package, and pinout before attaching programming hardware.
+</Callout>
+</section>
+
+<section id="case-evidence-labels">
+## Evidence & Confidence Labels
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th scope="col">Label</th><th scope="col">Meaning</th></tr></thead>
+  <tbody>
+    <tr><td>Confirmed</td><td>Reproduced or directly verified by project research.</td></tr>
+    <tr><td>Observed</td><td>Seen in hardware, software, emulator behavior, or source material, but not yet fully generalized.</td></tr>
+    <tr><td>Community Reported</td><td>Reported by community sources but not independently reproduced by TamaMedics.</td></tr>
+    <tr><td>Unverified</td><td>Plausible information without sufficient evidence.</td></tr>
+    <tr><td>Researching</td><td>Currently under active investigation.</td></tr>
+    <tr><td>Planned</td><td>Intended future work.</td></tr>
+  </tbody>
+</table>
+</div>
+</section>
+
+<section id="case-research-log">
+## Research Log / Milestones
+
+No dated research log has been published yet. The current truthful project sequence is:
+
+- **Current:** Architecture & Flash Identification
+- **Next:** Verified Hardware Dump Methodology
+- **Planned:** Firmware Revision Catalog
+- **Planned:** Text Resource Mapping and Translation Tooling
+- **Planned:** Patch Validation
+</section>
+
+<section id="case-questions">
+## Open Questions
+
+- Which physical flash devices and packages appear across known board revisions?
+- Can a read-only dump be obtained reliably without desoldering?
+- What revision metadata exists inside each firmware image?
+- How are text, glyphs, layout constraints, and graphical resources encoded?
+- Which emulator checks best detect unsafe or structurally invalid patches?
+- What hardware recovery options exist if programming is interrupted?
+</section>
+
+<section id="case-contribute">
+## How to Contribute
+
+Useful evidence includes high-resolution PCB photos, readable IC markings, board revision identifiers, firmware hashes and dump metadata **without firmware uploads**, pin mappings, repair observations, emulator findings, translation research, and patch testing results.
+
+Describe the device, method, tools, and limits of the observation. Remove names, addresses, serial identifiers, and other personal information before sharing.
+
+<div class="actions"><a class="button" href="/contributing/">Contribution guide</a><a class="button secondary" href="/patches/">Patch library</a></div>
+</section>
+
+<section id="case-references">
+## References / Source Notes
+
+Reference material is being cataloged. Current source categories include TamaEmu source/code analysis, Epson S1C33 architecture documentation, NOR flash datasheets, and community hardware observations. Specific citations will be added only when they can be accurately recorded and linked.
+</section>
+
+<section id="case-legal">
+## Legal / Firmware Distribution Policy
+
+<Callout variant="legal">
+TamaMedics-created documentation, scripts, diagrams, patches/deltas, and original research are distinct from copyrighted vendor firmware and artwork. Full Bandai firmware images must not be uploaded to or distributed through TamaMedics. No repository-wide open-source license is implied.
+</Callout>
+</section>

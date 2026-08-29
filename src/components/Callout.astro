@@ -1,0 +1,12 @@
+---
+interface Props { variant?: 'note'|'warning'|'safety'|'evidence'|'legal'|'status'; label?: string; }
+const { variant='note', label } = Astro.props;
+const labels = { note:'Note', warning:'Warning', safety:'Safety critical', evidence:'Evidence note', legal:'Firmware distribution policy', status:'Research status' };
+---
+<aside class:list={['callout',variant]} aria-label={label ?? labels[variant]}>
+  <p class="callout-label">{label ?? labels[variant]}</p>
+  <div><slot /></div>
+</aside>
+<style>
+  .callout{--callout:var(--tm-cyan);margin:2rem 0;padding:1.1rem 1.25rem;border:1px solid color-mix(in srgb,var(--callout) 42%,transparent);border-left:4px solid var(--callout);background:color-mix(in srgb,var(--callout) 7%,var(--tm-panel-soft))}.warning,.safety{--callout:var(--tm-warning)}.safety{background:linear-gradient(110deg,rgba(255,117,133,.12),rgba(255,211,107,.05));--callout:var(--tm-danger)}.evidence{--callout:var(--tm-violet)}.legal{--callout:var(--tm-pink)}.status{--callout:var(--tm-lcd)}.callout-label{margin:0 0 .55rem;color:var(--callout);font:800 .68rem var(--font-mono);letter-spacing:.11em;text-transform:uppercase}.callout :global(p:first-child){margin-top:0}.callout :global(p:last-child),.callout :global(ul:last-child){margin-bottom:0}
+</style>

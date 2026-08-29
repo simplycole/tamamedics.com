@@ -44,6 +44,7 @@ The production site is available at [tamamedics.com](https://tamamedics.com). It
 ```text
 src/
   components/   Reusable Astro components
+  content/      Typed research and documentation entries
   layouts/      Shared page layouts
   pages/        File-based site routes
   styles/       Global styles and design tokens
@@ -52,6 +53,8 @@ dist/           Generated production build output
 ```
 
 `dist/` is created by the build process and should not be edited manually. Make changes in `src/` or `public/`, then rebuild.
+
+Content collection schemas live in `src/content.config.ts`. Research projects may be published as MDX; empty collections are ready for future lab notes, repair guides, and device records.
 
 ## Local Development
 
