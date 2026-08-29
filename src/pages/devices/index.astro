@@ -1,0 +1,5 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro'; import FeatureCard from '../../components/FeatureCard.astro';
+const eras=[['Original-era','Early virtual pet device families and known variants.'],['Connection-era','Connected-device generations and regional releases.'],['Color-era','Color-screen hardware generations and revisions.'],['Modern-era','Current device families and preservation references.']];
+---
+<ContentLayout title="Device Archive" description="A growing index of device generations, models, board revisions, and known hardware information." eyebrow="Archive index // cataloging"><section class="section-block"><div class="section-heading"><div><p class="eyebrow">Catalog structure</p><h2>Browse by era</h2></div><p>These are navigational groupings, not claims of complete coverage or specifications.</p></div><div class="card-grid">{eras.map(([title,description],i)=><FeatureCard {title} {description} href="/devices/" code={`D0${i+1}`} action="Documentation pending" />)}</div></section></ContentLayout>

@@ -1,0 +1,5 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro'; import FeatureCard from '../../components/FeatureCard.astro';
+const items=[['Battery & Power','Power faults, battery contacts, and safe first checks.'],['Buttons & Contacts','Input diagnostics and contact cleaning.'],['LCD / Display','Display symptoms and careful inspection.'],['Shell & Cosmetic Repair','Conservation-minded exterior restoration.'],['Corrosion / Water Damage','Assessment and stabilization workflows.'],['Speaker / Audio','Audio-path diagnostics and repair notes.']];
+---
+<ContentLayout title="Clinic" description="Repair guides, diagnostics, teardown notes, and common hardware failures." eyebrow="Repair intake // documentation building"><section class="section-block"><div class="section-heading"><div><p class="eyebrow">Patient intake</p><h2>Choose a symptom area</h2></div><p>Categories are open; reviewed procedures are still being prepared.</p></div><div class="card-grid">{items.map(([title,description],i)=><FeatureCard {title} {description} href="/clinic/" code={`C0${i+1}`} action="Documentation pending" />)}</div></section></ContentLayout>

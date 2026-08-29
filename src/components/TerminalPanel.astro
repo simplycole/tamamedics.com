@@ -1,0 +1,6 @@
+---
+interface Props { items: Array<[string,string]>; }
+const { items } = Astro.props;
+---
+<aside class="terminal" aria-label="System readout"><div class="terminal-head"><span></span><span></span><span></span><b>TM_DIAGNOSTIC</b></div><dl>{items.map(([key,value]) => <><dt>{key}</dt><dd>{value}</dd></>)}</dl></aside>
+<style>.terminal{border:1px solid rgba(200,240,131,.3);border-radius:var(--radius-md);background:linear-gradient(rgba(200,240,131,.06),rgba(200,240,131,.02)),#0b100c;box-shadow:inset 0 0 35px rgba(200,240,131,.04);overflow:hidden}.terminal-head{display:flex;align-items:center;gap:.4rem;padding:.65rem .8rem;border-bottom:1px solid rgba(200,240,131,.2)}.terminal-head span{width:7px;height:7px;border-radius:50%;background:var(--tm-pink)}.terminal-head span:nth-child(2){background:var(--tm-warning)}.terminal-head span:nth-child(3){background:var(--tm-lcd)}b{margin-left:auto;color:var(--tm-lcd);font:600 .65rem var(--font-mono)}dl{display:grid;grid-template-columns:1fr auto;gap:.75rem 1rem;margin:0;padding:1.2rem;font:.72rem/1.4 var(--font-mono);text-transform:uppercase}dt{color:#879b70}dd{margin:0;color:var(--tm-lcd);text-align:right}</style>

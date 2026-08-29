@@ -1,0 +1,7 @@
+---
+import StatusBadge from './StatusBadge.astro';
+interface Props { eyebrow?: string; title: string; description: string; status?: 'active'|'confirmed'|'observed'|'community'|'unverified'|'planned'|'archived'; }
+const { eyebrow='TamaMedics directory', title, description, status='planned' } = Astro.props;
+---
+<header class="section-header panel panel-pad"><div><p class="eyebrow">{eyebrow}</p><h1>{title}</h1><p class="lead">{description}</p></div><StatusBadge {status} /></header>
+<style>.section-header{position:relative;display:flex;justify-content:space-between;align-items:start;gap:var(--space-5);border-radius:var(--radius-sm);border-top-color:var(--tm-pink);background:linear-gradient(110deg,#2a192d,#17121e 60%)}.section-header::before{content:"TM // DIRECTORY";position:absolute;right:1rem;bottom:.7rem;color:#766b7b;font:600 .55rem var(--font-mono);letter-spacing:.1em}.section-header::after{content:"+";position:absolute;right:1rem;top:.35rem;color:var(--tm-border);font:2rem var(--font-mono)}h1{font-size:clamp(2.2rem,6vw,4.5rem)}.lead{margin-bottom:0}@media(max-width:600px){.section-header{flex-direction:column}.section-header::before{display:none}}</style>

@@ -1,0 +1,29 @@
+---
+import StatusBadge from './StatusBadge.astro';
+const directions = [
+  ['Epson S1C33-family architecture', 'Researching'],
+  ['Approx. 4 MiB / 32 Mbit parallel NOR', 'Observed'],
+  ['Firmware revision identification', 'Researching'],
+  ['Verified, repeatable dump methodology', 'Planned'],
+  ['Emulator validation and patch/delta tooling', 'Planned'],
+];
+---
+<article class="case-file">
+  <header class="case-header"><div><span class="technical-label">Case file</span><b>TM-RP-001</b></div><StatusBadge status="active" /></header>
+  <div class="case-body">
+    <div class="case-copy">
+      <dl class="identity"><div><dt>Patient</dt><dd>Tamagotchi Plus Color</dd></div><div><dt>Procedure</dt><dd>English Firmware Research</dd></div></dl>
+      <p>Investigating safe firmware dumping, documentation, emulation, translation and patch development while keeping copyrighted firmware images out of distribution.</p>
+      <div class="objective"><span class="technical-label">Purpose</span><p>Build reproducible knowledge and delta-based tooling that device owners and researchers can verify independently.</p></div>
+      <a class="button secondary" href="/projects/">Open case record</a>
+    </div>
+    <div class="evidence">
+      <div class="evidence-head"><span class="technical-label">Research directions</span><small>Confidence labeled</small></div>
+      <ul>{directions.map(([item,status]) => <li><span>{item}</span><em>{status}</em></li>)}</ul>
+      <p class="caution">Provisional findings stay provisional until repeatable evidence supports them.</p>
+    </div>
+  </div>
+</article>
+<style>
+  .case-file{border:1px solid var(--tm-border);border-radius:var(--radius-sm);background:#17101e;box-shadow:var(--shadow-panel);overflow:hidden}.case-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 1rem;border-bottom:1px solid var(--tm-border);background:linear-gradient(90deg,rgba(240,106,168,.16),transparent)}.case-header>div{display:flex;align-items:center;gap:.8rem}.case-header .technical-label{margin:0}.case-header b{font:750 .78rem var(--font-mono);letter-spacing:.08em}.case-body{display:grid;grid-template-columns:1.05fr .95fr}.case-copy,.evidence{padding:clamp(1.4rem,4vw,2.7rem)}.identity{margin:0}.identity div+div{margin-top:1.2rem}.identity dt{color:var(--tm-cyan);font:700 .64rem var(--font-mono);letter-spacing:.12em;text-transform:uppercase}.identity dd{margin:.2rem 0 0;color:var(--tm-text);font-weight:850;font-size:clamp(1.45rem,3vw,2.35rem);line-height:1.08}.identity div+div dd{color:var(--tm-violet);font-size:clamp(1.05rem,2vw,1.35rem)}.objective{margin:1.5rem 0;padding:1rem;border-left:3px solid var(--tm-pink);background:rgba(240,106,168,.055)}.objective .technical-label,.objective p{margin:0}.objective p{margin-top:.35rem}.evidence{border-left:1px solid var(--tm-border);background:#122024}.evidence-head{display:flex;justify-content:space-between;gap:1rem}.evidence-head small{color:var(--tm-text-muted);font:600 .6rem var(--font-mono);text-transform:uppercase}.evidence ul{margin:1rem 0;padding:0;list-style:none}.evidence li{display:grid;grid-template-columns:1fr auto;gap:1rem;padding:.78rem 0;border-bottom:1px solid rgba(255,255,255,.09);color:var(--tm-text-muted)}.evidence em{align-self:start;padding:.2rem .35rem;border:1px solid currentColor;border-radius:2px;color:var(--tm-cyan);font:normal .58rem var(--font-mono);text-transform:uppercase}.caution{margin:1rem 0 0;color:#aebbb8;font:italic .76rem/1.5 var(--font-body)}@media(max-width:760px){.case-body{grid-template-columns:1fr}.evidence{border-left:0;border-top:1px solid var(--tm-border)}}@media(max-width:440px){.case-header,.evidence-head{align-items:flex-start;flex-direction:column}.evidence li{grid-template-columns:1fr}.case-header>div{align-items:flex-start;flex-direction:column;gap:.25rem}}
+</style>

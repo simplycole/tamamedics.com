@@ -1,0 +1,7 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+interface Props { title:string; description:string; eyebrow?:string; status?:'active'|'confirmed'|'observed'|'community'|'unverified'|'planned'|'archived'; }
+const { title, description, eyebrow, status } = Astro.props;
+---
+<BaseLayout title={`${title} — TamaMedics`} description={description}><div class="container page-shell"><SectionHeader {title} {description} {eyebrow} {status} /><slot /></div></BaseLayout>
