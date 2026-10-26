@@ -25,6 +25,10 @@ Current research directions include:
 
 This is active research. No finished English patch is being claimed or distributed.
 
+**Research Project #002: Tamagotchi Uni Revival**
+
+Documenting online-service dependencies and investigating original-hardware compatibility. No replacement API or community server is operational. The public hub is `/research/uni-revival/`; engineering references and hardware prerequisites are in [docs/uni-revival/README.md](docs/uni-revival/README.md).
+
 ## Website
 
 The production site is available at [tamamedics.com](https://tamamedics.com). It is generated statically from this repository and hosted on SiteGround.

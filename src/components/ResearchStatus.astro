@@ -1,0 +1,25 @@
+---
+const stages = [
+  ['Public documentation', 'In progress'],
+  ['Hardware research', 'Planned'],
+  ['Network capture', 'Not yet performed by TamaMedics'],
+  ['Endpoint inventory', 'Incomplete'],
+  ['TLS / device authentication', 'Incomplete'],
+  ['Replacement API', 'Not implemented'],
+  ['Stock-device compatibility', 'Unproven'],
+  ['Community server', 'Not operational'],
+];
+---
+<div class="research-status" aria-label="Uni Revival research status">
+  <p class="eyebrow">TM-RP-002 // Documentation phase</p>
+  <p>Research baseline: <time datetime="2026-10-26">October 26, 2026</time>. Public sources reviewed <time datetime="2026-10-25">October 25, 2026</time>; static integration validated October 26. This is a dated research record.</p>
+  <dl>{stages.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+</div>
+<style>
+  .research-status{margin-block:1.5rem;padding:clamp(1rem,3vw,1.5rem);border:1px solid var(--tm-border);border-top:3px solid var(--tm-lcd);background:var(--tm-panel-soft)}
+  .research-status>p{margin-top:0}.research-status dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 1.5rem;margin:0}
+  .research-status dl div{padding:.85rem 0;border-top:1px solid var(--tm-border-soft)}
+  .research-status dt{color:var(--tm-cyan);font:700 .65rem/1.5 var(--font-mono);text-transform:uppercase}
+  .research-status dd{margin:.35rem 0 0;color:var(--tm-text);font-size:.95rem}
+  @media(max-width:560px){.research-status dl{grid-template-columns:1fr}}
+</style>

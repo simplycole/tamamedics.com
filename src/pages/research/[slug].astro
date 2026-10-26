@@ -9,9 +9,7 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
-const toc = [
-  ['#case-summary','Project Summary'],['#case-status','Current Status'],['#case-goals','Goals'],['#case-known','What We Know'],['#case-unknown','What We Do Not Know'],['#case-architecture','Architecture Notes'],['#case-workflow','Preservation Workflow'],['#case-patch-strategy','Patch Strategy'],['#case-safety','Safety Principles'],['#case-evidence-labels','Evidence Labels'],['#case-research-log','Research Log'],['#case-questions','Open Questions'],['#case-contribute','How to Contribute'],['#case-references','References'],['#case-legal','Legal Policy'],
-].map(([href,label])=>({href,label}));
+const toc = project.data.toc;
 ---
 <TechnicalContentLayout title={project.data.title} description={project.data.summary} projectId={project.data.projectId} device={project.data.device} category={project.data.category} confidence={project.data.confidence} status={project.data.status} {toc}>
   <Content />
