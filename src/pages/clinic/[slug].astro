@@ -2,4 +2,18 @@
 import { getCollection, render } from 'astro:content'; import CollectionEntryLayout from '../../layouts/CollectionEntryLayout.astro';
 export async function getStaticPaths(){return (await getCollection('guides')).map(entry=>({params:{slug:entry.id.replace(/\.(md|mdx)$/,'')},props:{entry}}));} const { entry }=Astro.props; const { Content }=await render(entry);
 ---
-<CollectionEntryLayout title={entry.data.title} description={entry.data.summary} section="Clinic" sectionHref="/clinic/" status={entry.data.status}><Content /></CollectionEntryLayout>
+<CollectionEntryLayout
+  title={entry.data.title}
+  description={entry.data.summary}
+  section="Clinic"
+  sectionHref="/clinic/"
+  status={entry.data.status}
+  metadata={[
+    ['Device', entry.data.device],
+    ['Type', entry.data.guideType ?? 'Technical guide'],
+    ['Difficulty', entry.data.difficulty],
+    ['Risk', entry.data.risk],
+    ['Verification', entry.data.verification ?? entry.data.status],
+  ]}
+  toc={entry.data.toc}
+><Content /></CollectionEntryLayout>

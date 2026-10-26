@@ -1,0 +1,9 @@
+---
+interface Props { description: string; }
+const { description } = Astro.props;
+---
+<figure class="image-placeholder">
+  <div role="img" aria-label={`Documentation image pending: ${description}`}><span>Documentation image pending</span></div>
+  <figcaption>Photo needed — {description}</figcaption>
+</figure>
+<style>.image-placeholder div{display:grid;place-items:center;min-height:clamp(180px,38vw,320px);padding:2rem;border:1px dashed var(--tm-cyan);background:repeating-linear-gradient(135deg,rgba(113,229,226,.025) 0 12px,transparent 12px 24px);color:var(--tm-cyan);text-align:center}.image-placeholder span{font:750 .72rem var(--font-mono);letter-spacing:.1em;text-transform:uppercase}</style>

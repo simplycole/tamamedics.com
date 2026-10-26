@@ -41,9 +41,12 @@ const guides = defineCollection({
     difficulty: z.enum(['basic', 'intermediate', 'advanced']),
     risk: z.enum(['low', 'moderate', 'high']),
     category: z.string(),
+    guideType: z.string().optional(),
+    verification: z.string().optional(),
     summary: z.string(),
     status: evidence,
     tools: z.array(z.string()).default([]),
+    toc: z.array(z.object({ href: z.string(), label: z.string() })).default([]),
     updated: z.coerce.date().optional(),
   }),
 });

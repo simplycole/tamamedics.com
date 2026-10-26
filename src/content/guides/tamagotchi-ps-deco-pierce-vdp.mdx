@@ -1,0 +1,295 @@
+---
+title: Tamagotchi P’s Deco Pierce Patch and Virtual Deco Pierces — Work in Progress
+device: Tamagotchi P’s
+difficulty: intermediate
+risk: moderate
+category: Software / Modification
+guideType: Research & Development — Work in Progress
+summary: Research and development notes on Mr. Blinky’s Deco Pierce patch and Virtual Deco Pierces. Hardware verification, photos, exact procedures, and recovery documentation remain incomplete.
+status: researching
+verification: Verification pending
+tools:
+  - Reliable batteries
+  - Compatible infrared transfer device
+  - Computer or compatible file-transfer device
+toc:
+  - { href: '#overview', label: 'What this guide does' }
+  - { href: '#credits-original-work', label: 'Credits & original work' }
+  - { href: '#terminology', label: 'Pierce, patch, VDP & VDP+' }
+  - { href: '#english-patch', label: 'English patch distinction' }
+  - { href: '#requirements', label: 'What you need' }
+  - { href: '#before-you-begin', label: 'Before you begin' }
+  - { href: '#patch-installation', label: 'Install the patch' }
+  - { href: '#vdp-installation', label: 'Install and link a VDP' }
+  - { href: '#switching', label: 'Switching content' }
+  - { href: '#troubleshooting', label: 'Troubleshooting' }
+  - { href: '#recovery', label: 'Recovery & removal' }
+  - { href: '#faq', label: 'FAQ' }
+  - { href: '#credits', label: 'Credits' }
+  - { href: '#sources', label: 'Sources' }
+---
+import Callout from '../../components/Callout.astro';
+import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+
+<section id="overview">
+## What this guide does
+
+<Callout variant="status" label="Research & Development — Work in Progress">
+**End-to-end hardware testing has not been completed by TamaMedics. Verification pending.**
+
+Original procedure photos, exact menu and button sequences, package-specific instructions, activation/linking confirmation, switching behavior, and recovery/removal procedures remain incomplete. This page documents research under development; it is not a fully verified installation procedure. Follow the original creator’s instructions for the exact package and stop wherever a step is unresolved. The photo placeholders below intentionally identify evidence still needed.
+</Callout>
+
+This guide explains the relationship between a physical Tama Deco Pierce, Mr. Blinky’s Deco Pierce patch, and Virtual Deco Pierces (VDPs), then outlines a proposed workflow for transferring them to a Tamagotchi P’s over compatible infrared hardware.
+
+It is intentionally transparent about its limits: TamaMedics has not yet completed the live procedure. Exact Japanese menu positions, package-specific filenames, and switching/removal behavior remain marked for verification rather than guessed.
+
+<Callout variant="status" label="TamaMedics verification">
+<div class="verification-grid">
+  <p><strong>12-hour patch installation</strong><br />Verification pending</p>
+  <p><strong>VDP transfer</strong><br />Verification pending</p>
+  <p><strong>VDP linking</strong><br />Verification pending</p>
+  <p><strong>Long-term Pierce retention</strong><br />Verification pending</p>
+</div>
+</Callout>
+</section>
+
+<section id="credits-original-work">
+## Credits & original work
+
+<Callout variant="evidence" label="Original community work">
+The patch and VDP system documented here are community work, not TamaMedics creations.
+
+- **Mr. Blinky / MstrBlinky:** Deco Pierce patch, VDP technical work/system, and associated Tamagotchi P’s modification work.
+- **Myiko:** collaborator on the historically announced Virtual Deco Pierce character project and related character artwork/content where credited.
+- **TamaMedics:** modern preservation-oriented documentation, independent procedure verification pending, and original photos/screenshots when captured.
+
+Individual packages may name additional creators. Preserve and follow every README and credit file included with the package; do not assume one person created every VDP.
+</Callout>
+
+Obtain files from the [original Mr. Blinky VDP resource page](http://mrblinky.net/tama/vdp/) wherever possible. TamaMedics does not host the patch, VDP archives, Bandai data, or third-party artwork. Mirroring should happen only after redistribution rights or permission are established.
+</section>
+
+<section id="terminology">
+## Understanding the P’s Pierce system
+
+### Physical Tama Deco Pierce
+
+A physical Deco Pierce is an accessory that connects to the Tamagotchi P’s and makes additional themed content available. Content varies between Pierces; do not assume every one supplies the same characters, items, locations, or activities.
+
+### Deco Pierce patch / “12-hour patch”
+
+When a Pierce is disconnected, the unmodified P’s eventually unlinks its Pierce content. The community therefore commonly calls Mr. Blinky’s modification the **12-hour patch**: it changes that retention behavior so linked Pierce or VDP content can remain available without a physical Pierce continuously attached. It is a prerequisite for the historical VDP workflow. “12-hour patch” is a community description, not an official Bandai product name.
+
+### VDP
+
+**VDP** means **Virtual Deco Pierce**. Historical project documentation describes VDPs as downloadable destinations that can be transferred and linked to the P’s to behave similarly to Pierce content. Some packages contain original characters and themed content. Their contents, number of files, evolution conditions, and credits can differ.
+
+### VDP+
+
+**VDP+** identifies virtualized Deco Pierce content within this ecosystem, including virtual representations of physical Pierce content where the project made them available. It is distinct from the custom-character VDP project. This guide does not claim that every physical Deco Pierce has a VDP+ counterpart.
+</section>
+
+<section id="english-patch">
+## What the English patch does—and does not do
+
+<Callout variant="warning" label="Separate patches">
+The Tamagotchi P’s English translation patch and the Deco Pierce patch are separate modifications. Installing the English patch does **not** install the Deco Pierce/12-hour patch.
+</Callout>
+
+Historical VDP material recommends an English-patched P’s because VDP content was prepared with English-language data. That does not mean the English patch translates every physical Deco Pierce. Community reports say physical Pierce content can remain Japanese; TamaMedics has not yet independently reproduced that behavior.
+</section>
+
+<section id="requirements">
+## What you need
+
+- A Tamagotchi P’s.
+- Fresh or otherwise reliable batteries.
+- A computer or compatible file-transfer device.
+- An infrared transfer method known to work with P’s downloads.
+- Mr. Blinky’s original Deco Pierce patch from the creator’s source.
+- The desired VDP package from its original source.
+- The included README/instructions and enough uninterrupted time to follow them.
+
+### Option A — compatible infrared phone
+
+Historically, community members have used infrared-equipped phones capable of sending the relevant download files. Compatibility depends on the handset and its transfer software. **Community method—TamaMedics verification pending.**
+
+### Option B — USB IrDA adapter and computer
+
+Community workflows also use compatible USB IrDA hardware. Not every modern adapter, operating-system driver, or generic infrared remote-control device supports the transfer method the P’s expects. Exact software steps are platform-specific. **Community method—TamaMedics verification pending.**
+
+<ImagePlaceholder description="Transfer device, computer, and infrared alignment with the P’s." />
+</section>
+
+<section>
+## Before you begin
+
+<Callout variant="safety" label="Before you begin">
+- Install reliable batteries; avoid starting with a low-power warning.
+- Read the original README and package-specific instructions completely.
+- Confirm every file is intended for the Tamagotchi P’s.
+- Keep each original archive, README, and credit file together.
+- Do not rename, omit, or reorder package parts unless its instructions say to.
+- Do not mix unknown patches into this procedure.
+- Once a patch execution begins, do not intentionally interrupt it.
+</Callout>
+
+This is a device modification, but the available evidence does not justify sensational claims about failure. The proportionate precautions are stable power, correct P’s files, an established transfer method, and strict adherence to creator documentation.
+</section>
+
+<section id="patch-installation">
+## Install the Deco Pierce patch
+
+### Step 1 — Obtain the original files
+
+Open [Mr. Blinky’s Virtual Deco Pierce resources](http://mrblinky.net/tama/vdp/) and use the creator-provided Deco Pierce patch link and instructions. Do not substitute a similarly named file from an uncredited mirror. Retain the download archive and documentation as received.
+
+<ImagePlaceholder description="Original source files and README on the computer; exclude personal paths." />
+
+### Step 2 — Prepare the infrared transfer method
+
+Set up a phone or computer/IrDA workflow already known to transfer P’s download files. Keep the transmitter and the P’s infrared window aligned at the distance recommended for that hardware. Close applications that could seize the adapter or interrupt the send.
+
+### Step 3 — Transfer the patch
+
+1. On the P’s, enter the appropriate download/receive state. **[Verify exact menu and button sequence during TamaMedics testing.]**
+2. Start sending the patch file with the compatible infrared device.
+3. Keep both devices steady until each reports success or failure.
+4. If it fails, return both devices to their starting state before retrying; do not assume a partial transfer succeeded.
+
+<ImagePlaceholder description="P’s download/receive menu before the patch transfer." />
+<ImagePlaceholder description="Successful infrared patch transfer confirmation." />
+
+### Step 4 — Run the transferred patch
+
+Locate the transferred patch/destination on the P’s and run it exactly as the original documentation directs. **[Verify exact menu path, displayed title, prompts, and completion screen during TamaMedics testing.]** Do not remove batteries or press reset while it is executing.
+
+<ImagePlaceholder description="Deco Pierce patch entry in downloaded destinations." />
+<ImagePlaceholder description="Patch execution and completion screens." />
+
+### Step 5 — Verify the patch
+
+Confirm normal operation first. The meaningful functional check is whether linked Pierce/VDP content remains available after the unmodified device would normally unlink disconnected content. TamaMedics’ long-term retention test is pending, so the public status remains **verification pending**.
+</section>
+
+<section id="vdp-installation">
+## Install and link a Virtual Deco Pierce
+
+### Step 6 — Download a VDP
+
+Choose a package from the original VDP page. Extract it without discarding its README, banner, or credits. Read its instructions before transferring anything. VDPs are not necessarily interchangeable in structure.
+
+### Step 7 — Transfer every required file
+
+1. Identify every required part from that package’s README.
+2. Preserve the stated order. Do not assume all VDPs have the same number of parts.
+3. Put the P’s into its appropriate receive state. **[Verify exact menu path during TamaMedics testing.]**
+4. Send each required file, one at a time, confirming success before continuing.
+5. If any part fails, consult the package instructions before restarting or resending the sequence.
+
+<ImagePlaceholder description="VDP package parts and README before transfer." />
+<ImagePlaceholder description="VDP infrared transfer in progress." />
+
+### Step 8 — Link or activate the VDP
+
+Open the transferred VDP destination and activate/link it according to its included directions. **[Verify the exact destination menu, activation prompts, and expected confirmation during TamaMedics testing.]** The Deco Pierce patch should already be installed before this step.
+
+<ImagePlaceholder description="VDP destination before activation and the successful linked state." />
+
+### Step 9 — Verify its content
+
+Check the package documentation for the content it promises, then confirm only those elements. A character VDP may require a package-specific item or action during a particular growth stage, possibly multiple times. Gender, stage, item, and evolution conditions vary; never reuse one character’s conditions as a universal chart.
+
+<ImagePlaceholder description="Example VDP-exclusive content captured by TamaMedics." />
+</section>
+
+<section id="switching">
+## Switching between VDPs and physical Pierces
+
+The P’s normally treats Pierce content as one active link at a time, but the exact consequences of linking another VDP, inserting a physical Pierce, or intentionally removing content have not yet been reproduced by TamaMedics.
+
+<Callout variant="warning" label="Needs verification">
+Before switching while raising a Pierce-exclusive character, consult both packages’ original instructions. Whether the new link overwrites, unlinks, or is blocked by the current state must be recorded during live testing. Do not promise that a character or progress state will survive a switch.
+</Callout>
+</section>
+
+<section>
+## Troubleshooting
+
+These are diagnostic checks, not guaranteed diagnoses.
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Problem</th><th>Check</th><th>Evidence status</th></tr></thead>
+  <tbody>
+    <tr><td>Patch or VDP will not transfer</td><td>Confirm the P’s is in receive state; check IR-device compatibility, alignment, distance, software, and batteries.</td><td>Community workflow; TamaMedics testing pending</td></tr>
+    <tr><td>Transfer stops or fails</td><td>Stabilize alignment, retry with reliable batteries, and verify the adapter/driver supports this data-transfer workflow.</td><td>Possible causes, not a diagnosis</td></tr>
+    <tr><td>VDP transferred but will not link</td><td>Confirm the Deco Pierce patch was installed; compare transferred parts and order against that VDP’s README.</td><td>Creator/community procedure; exact UI pending</td></tr>
+    <tr><td>Expected content is missing</td><td>Check whether all parts succeeded and whether the package has character stage, gender, item, or action requirements.</td><td>Package-specific</td></tr>
+    <tr><td>Content appears in Japanese</td><td>Remember that English and Deco Pierce patches are separate; physical Pierce translation is not guaranteed.</td><td>Community reported; not TamaMedics verified</td></tr>
+    <tr><td>Content later unlinks</td><td>Recheck whether the correct Deco Pierce patch was actually run rather than merely transferred.</td><td>Needs TamaMedics reproduction</td></tr>
+  </tbody>
+</table>
+</div>
+</section>
+
+<section id="recovery">
+## Recovery and removal considerations
+
+If a transfer fails before execution, stop and verify the source file, batteries, and transfer method rather than repeatedly sending unknown data. If the P’s still operates normally, preserve its current state and document the displayed error.
+
+TamaMedics has not yet verified a universal removal or restore procedure for the Deco Pierce patch or every VDP package. Do not describe a reset, battery removal, or replacement transfer as “safe recovery” without creator instructions for that exact case. For an unresponsive or abnormal device, avoid further experimental patches and seek package-specific advice from the original source/community while recording what was sent and what the device displayed.
+
+<Callout variant="note" label="Preservation record">
+Keep the original archive, README, source URL, date obtained, transfer hardware/software, file order, device state, results, and photos of any error. That record is often more useful than a filename alone when a historical link disappears.
+</Callout>
+</section>
+
+<section id="faq">
+## Frequently asked questions
+
+### Do I need the English patch?
+
+The English translation is separate. Historical VDP documentation recommends it for English-prepared VDP content, but it does not replace the Deco Pierce patch.
+
+### Do I need the Deco Pierce patch?
+
+Yes for the documented historical VDP workflow: the patch prevents the disconnected-content unlink behavior that would otherwise undermine a virtual Pierce.
+
+### Are VDP and VDP+ the same thing?
+
+No. VDP refers to the virtual-content system and its custom packages; VDP+ labels virtualized physical-Pierce content offered within the project where available.
+
+### Does every package use the same files or evolution conditions?
+
+No. Treat each included README as authoritative for that package.
+
+### Can I install another VDP or use a physical Pierce later?
+
+**Needs verification.** One linked content set and character-state restrictions may affect switching. This guide will be updated after controlled tests.
+
+### Does TamaMedics provide the downloads?
+
+No. TamaMedics documents the procedure and links to creator sources. It does not redistribute third-party patch files, VDP archives, Bandai data, or artwork in this guide.
+</section>
+
+<section id="credits">
+## Credits and community acknowledgement
+
+- **Mr. Blinky / MstrBlinky** — Deco Pierce patch, VDP technical implementation/system, and Tamagotchi P’s modification work documented on the original VDP resource page.
+- **Myiko** — collaborator on the Virtual Deco Pierce character project and related content/artwork as described in the historical TamaTalk announcement.
+- **Individual VDP contributors** — as named inside each package; those credits must be preserved.
+- **TamaMedics** — this preservation-oriented guide, independent verification pending, and future original procedure photography.
+
+The wider P’s modification record developed across creators’ sites and long-running spaces including TamaTalk and Tama-Zone. This acknowledgement does not imply their endorsement of TamaMedics.
+</section>
+
+<section id="sources">
+## Sources and further reading
+
+- <a href="http://mrblinky.net/tama/vdp/" target="_blank" rel="noopener noreferrer">Mr. Blinky — Virtual Deco Pierce resources</a> — primary creator/project source for the patch, VDPs, VDP+, package instructions, and downloads. Historical sites can disappear; retain creator name, page title, README, and credits with files obtained lawfully.
+- <a href="https://www.tamatalk.com/threads/new-tamagotchi-vdps.192525/" target="_blank" rel="noopener noreferrer">Myiko — “New Tamagotchi VDP’s” (TamaTalk, 2015)</a> — historical announcement describing the project with Mr. Blinky and noting the Deco Pierce patch requirement.
+- <a href="https://github.com/MrBlinky/TamaPsTranslation" target="_blank" rel="noopener noreferrer">MrBlinky — Tamagotchi P’s English Translation project</a> — first-party project record supporting the distinction between English translation work and the Deco Pierce/VDP system.
+- <a href="https://www.tamatalk.com/threads/where-to-find-patches-and-downloads-for-the-ps.192557/" target="_blank" rel="noopener noreferrer">TamaTalk — “Where to Find Patches and Downloads for the P’s?”</a> — supplementary historical community thread that lists the translation and Deco Pierce patch as separate resources.
+</section>
