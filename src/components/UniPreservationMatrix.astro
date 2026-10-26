@@ -1,0 +1,28 @@
+---
+const features = [
+  { name:'Network setup / discovery', official:'Wi-Fi connectivity is documented by AWS; detailed setup needs FAQ re-review.', source:'#ref-aws', dependency:'Internet access documented; discovery mechanism unresolved.', missing:'2.4GHz setup, DNS, endpoints, cache lifetime.', observe:'Planned: normal connection after network approval.', priority:'Critical' },
+  { name:'Information / news', official:'AWS describes announcement delivery.', source:'#ref-aws', dependency:'Cloud announcements documented; device refresh path unresolved.', missing:'Triggers, refresh interval, caching, errors.', observe:'Planned: one manual refresh; confirm menu first.', priority:'High' },
+  { name:'Items / online gifts', official:'AWS describes item distribution and update flags.', source:'#ref-aws', dependency:'Remote distribution documented; per-item transport unknown.', missing:'Gift eligibility, retrieval, duplicate handling.', observe:'Planned: ordinary information check; avoid code redemption.', priority:'High' },
+  { name:'Tamaverse', official:'AWS describes connected interaction and events.', source:'#ref-aws', dependency:'Cloud involvement documented; local/remote split unknown.', missing:'Session state, regional behavior, offline limits.', observe:'Planned: one ordinary visit; record visible result.', priority:'High' },
+  { name:'Tama Arena', official:'September 2026 event announcement is indexed by search.', source:'#ref-arena', dependency:'Global event/results suggest remote exchanges; exact path unverified.', missing:'Event timing, scoring, rewards, retry behavior.', observe:'Conditional: only during a normal available event.', priority:'High' },
+  { name:'Tama Portal / DL areas', official:'Ticket Shop documents downloading and selecting an area.', source:'#ref-shop', dependency:'Download needed; ongoing area checks unresolved.', missing:'Entitlement checks, area switching, local cache.', observe:'Conditional: view an already installed area; no new ticket.', priority:'High' },
+  { name:'Downloaded content / re-download', official:'Shop explains initial download; re-download rules need review.', source:'#ref-shop', dependency:'Initial remote download documented; recovery path unknown.', missing:'Retention, re-download limits, code consumption.', observe:'Defer deletion and re-download; inventory existing content first.', priority:'Critical' },
+  { name:'Firmware / OTA', official:'AWS describes Jobs-based firmware delivery.', source:'#ref-aws', dependency:'Remote distribution documented; verification format unknown.', missing:'Manifest, version policy, integrity/trust requirements.', observe:'Defer updates; observe availability only if no install starts.', priority:'High' },
+  { name:'Time / server configuration', official:'Bandai publishes time-bounded event schedules.', source:'#ref-arena', dependency:'Server configuration plausible; local clock contribution unknown.', missing:'Timezone rules, rollover, config lifetime.', observe:'Planned: record natural transitions; do not change clock.', priority:'Medium' },
+  { name:'Identity / authorization', official:'AWS describes IoT authentication and per-device state.', source:'#ref-aws', dependency:'Device authentication documented; identity format unknown.', missing:'Provisioning, certificate trust, authorization boundaries.', observe:'Metadata only; no credential extraction or account tests.', priority:'Critical' },
+];
+---
+<p id="matrix-help">Scroll horizontally for all evidence columns. Every observation below is planned; TamaMedics has not captured device traffic.</p>
+<div class="table-scroll preservation-matrix" role="region" aria-label="Uni feature preservation matrix" aria-describedby="matrix-help" tabindex="0">
+  <table>
+    <caption>Preservation inventory — prepared October 25, 2026</caption>
+    <thead><tr><th scope="col">Capability / official documentation</th><th scope="col">Remote dependency</th><th scope="col">Missing evidence</th><th scope="col">Safe live observation</th><th scope="col">Priority</th></tr></thead>
+    <tbody>{features.map(feature => <tr><th scope="row"><strong>{feature.name}</strong><p>{feature.official} <a href={feature.source}>Source</a></p></th><td>{feature.dependency}</td><td>{feature.missing}</td><td>{feature.observe}</td><td><span class="priority">{feature.priority}</span></td></tr>)}</tbody>
+  </table>
+</div>
+<style>
+  .preservation-matrix table{min-width:1050px}.preservation-matrix caption{text-align:left;padding:.75rem;color:var(--tm-text-muted);font-size:.85rem}
+  .preservation-matrix tbody th{width:25%;text-transform:none;background:transparent;font:inherit;color:var(--tm-text)}
+  .preservation-matrix tbody th p{font-size:.85rem;margin:.5rem 0 0}.preservation-matrix td{width:21%;color:var(--tm-text-muted)}
+  .priority{color:var(--tm-lcd);font:700 .7rem var(--font-mono)}
+</style>

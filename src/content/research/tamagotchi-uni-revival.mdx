@@ -1,0 +1,232 @@
+---
+title: Tamagotchi Uni Revival
+slug: uni-revival
+summary: Preserving the Uni's online-service knowledge and investigating whether original retail hardware could one day use an independent community service.
+status: active
+projectId: TM-RP-002
+device: Tamagotchi Uni
+category: Online Services / Preservation
+confidence: researching
+published: 2026-10-26
+updated: 2026-10-26
+tags:
+  - Tamagotchi Uni
+  - Preservation
+  - Online Services
+  - ESP32-S3
+  - AWS IoT
+  - Reverse Engineering
+  - Community Infrastructure
+toc:
+  - { href: '#uni-mission', label: 'Mission' }
+  - { href: '#uni-status', label: 'Current Status' }
+  - { href: '#uni-preservation', label: 'Preservation Matrix' }
+  - { href: '#uni-architecture', label: 'Architecture & Evidence' }
+  - { href: '#uni-history', label: 'Community Research' }
+  - { href: '#uni-trust', label: 'The Device Trust Blocker' }
+  - { href: '#uni-roadmap', label: 'Roadmap & Stage Gates' }
+  - { href: '#uni-contribute', label: 'Help Preserve the Uni' }
+  - { href: '#uni-log', label: 'Research Log' }
+  - { href: '#uni-references', label: 'References' }
+  - { href: '#uni-policy', label: 'Independence & Sharing' }
+---
+import Callout from '../../components/Callout.astro';
+import ResearchStatus from '../../components/ResearchStatus.astro';
+import UniPreservationMatrix from '../../components/UniPreservationMatrix.astro';
+
+<section id="uni-mission">
+## Keep the hardware. Preserve the connection.
+
+A working virtual pet can outlive the online services built around it. When a manufacturer retires infrastructure, connected features, event history, downloads, and recovery paths can disappear while the device itself still works.
+
+**Tamagotchi Uni Revival is TamaMedics research project TM-RP-002.** We are documenting the Uni's online ecosystem while public sources and opportunities for normal service observation remain available. Our long-term goal is original retail hardware compatibility with an independent service, where technically and legally feasible.
+
+We want to:
+
+- Document online behavior, feature dependencies, compatibility requirements, and service discovery.
+- Preserve publicly shareable protocol knowledge and characterize original service behavior through safe observation.
+- Define the smallest useful replacement backend, after evidence establishes what is needed.
+- Determine whether retail firmware can reach and trust that backend.
+- Publish reproducible methods, findings, and failures so others can build on the work.
+
+<div class="actions"><a class="button" href="#uni-contribute">Help preserve the Uni</a><a class="button secondary" href="#uni-roadmap">Read the roadmap</a></div>
+</section>
+
+<section id="uni-status">
+## Current status
+
+<Callout variant="warning" label="Security support is not a shutdown announcement">
+**Bandai's July 13, 2026 security-support end date is not a confirmed date for shutting down Tamagotchi Uni online services.** Bandai lists that support period on its [official product page](https://tamagotchi-official.com/us/series/uni/item/01_1/). We have not established a shutdown date.
+</Callout>
+
+Official material includes a [September 14 LOGGER item release](https://tamagotchi-official.com/us/news/01_1625/) and an [October 1 PANDA item announcement](https://tamagotchi-official.com/us/news/01_1676/). The latter was verified through indexed official text; direct retrieval returned maintenance. These show content announcements continuing beyond July. They do not prove current device-service availability or promise a future support period.
+
+<ResearchStatus />
+
+The public research hub is the first deliverable. A working replacement backend is a separate, unproven future phase. No live infrastructure has been launched for this project.
+</section>
+
+<section id="uni-preservation">
+## What we want to preserve
+
+Priority reflects loss risk and research value, not demonstrated feasibility. Dependencies can differ by feature, firmware, region, and time. We do not assume a single API or transport for every interaction.
+
+<UniPreservationMatrix />
+</section>
+
+<section id="uni-architecture">
+## Architecture: documented layers, open questions
+
+### What official sources establish
+
+The [AWS / Bandai / Phoenisys case study](https://aws.amazon.com/blogs/iot/efficiently-managing-millions-of-tamagotchi-devices-with-aws-iot/) describes these roles in the original architecture:
+
+- **AWS IoT Core:** authentication, connectivity, and messaging.
+- **Device Shadow:** device state and flags for retrieving new items and content.
+- **AWS IoT Jobs / Device Management:** fleet grouping and firmware distribution.
+- **AWS Lambda:** processing, announcements, and asset registration.
+- **DynamoDB / S3:** storage of service resources.
+- **Timestream:** action history, including downloads.
+- **FreeRTOS:** device-side software supporting cloud communication.
+
+This is an official architectural account published in 2023, not a TamaMedics trace of current menu interactions. It provides no complete replacement-service specification.
+
+[Bandai's open-source notices](https://tamagotchi-official.com/legalinfo/toy/uni/) identify FreeRTOS/corePKCS11, AWS embedded SDK components, core-mqtt-sys, esp-idf, mbed TLS, protobuf-c, TinyCBOR, libcoap, and other libraries. License attribution is dependency evidence. It does not prove that a given feature uses MQTT, HTTP, CoAP, protobuf, or CBOR on the wire.
+
+### The layers we need to investigate
+
+<ol>
+  <li><strong>Wi-Fi connectivity.</strong> Confirm supported 2.4GHz setup on our own unit and document association. No local device test yet.</li>
+  <li><strong>DNS / endpoint discovery.</strong> Record names, destination changes, and caching where visible. Current endpoint inventory is incomplete.</li>
+  <li><strong>TLS / certificate validation.</strong> Determine trust roots, hostname checks, and possible pinning. Passive metadata alone cannot establish all validation rules.</li>
+  <li><strong>Device identity / authentication.</strong> Establish requirements without extracting protected keys. Credential provisioning and authorization details remain unresolved.</li>
+  <li><strong>Application transport.</strong> Investigate HTTP, MQTT, or other messaging per operation. Ports and library names alone are insufficient identification.</li>
+  <li><strong>Cloud state / content.</strong> Separate observed operations, state transitions, and proposed contracts. Current behavior is unspecified.</li>
+  <li><strong>Assets / OTA.</strong> Identify delivery and integrity dependencies without distributing vendor binaries or triggering updates during the first baseline.</li>
+</ol>
+
+<Callout variant="evidence" label="How to read the evidence">
+**Official documentation** describes what a publisher says. **Observed** means directly seen in a named source or experiment. **Community Reported** means another researcher reported it, without TamaMedics reproduction. **Unverified** marks unsupported hypotheses; **Researching** and **Planned** describe work state. A hardware claim becomes **Confirmed** only with adequate, repeatable project evidence. No device protocol finding here has that status.
+</Callout>
+</section>
+
+<section id="uni-history">
+## Historical and community research
+
+In the [2023 GBAtemp investigation](https://gbatemp.net/threads/tamagotchi-uni-research-hacking.636515/), user **Zhongtiao1** reported networking observations including TLS 1.2 and the hostname <code>apiuni-tmgc.tyb.jp</code>. This is a historical community observation, not a validated current endpoint. TamaMedics has not contacted that host to test it.
+
+The [2026 GBAtemp research discussion](https://gbatemp.net/threads/tamagotchi-uni-the-research-reborn-or-well-updated.684334/), led by **N4A_System_01ki** with references to other researchers, discusses an ESP32-S3 module, disabled UART/JTAG paths, encrypted flash, and security-fuse constraints. These remain **Community Reported** here. We have not independently inspected those settings, decrypted firmware, or established a safe debug path. The thread's invasive research directions are outside our first hardware milestone.
+
+[mensfeld/hotspotchi](https://github.com/mensfeld/hotspotchi) is an open-source example of Uni-adjacent wireless experimentation using Raspberry Pi hotspots for Tama Search. It is not a complete replacement for Uni online services, nor evidence that stock firmware will trust an independent backend. We have not installed or run it for this project.
+</section>
+
+<section id="uni-trust">
+## The critical blocker: getting the Uni to trust a service
+
+<Callout variant="warning" label="Release-blocking question">
+**Hosting a compatible API does not automatically make a retail Uni connect to it.** Rebuilding service behavior and getting stock hardware to reach, authenticate with, and accept that service are separate engineering problems.
+</Callout>
+
+We do not yet know:
+
+- How service endpoints are discovered, or whether they are hardcoded or configurable.
+- Which TLS trust roots and hostname-validation rules apply.
+- Whether certificate pinning or additional device authentication is enforced.
+- Whether messages require device-specific authorization.
+- Whether reversible endpoint redirection is possible without firmware changes.
+- Whether a replacement can be accepted while the device retains normal operation.
+
+DNS control alone would not demonstrate compatibility. TLS acceptance would not establish correct application behavior. Stock-device compatibility requires a reproducible end-to-end demonstration with documented firmware, topology, and failure modes.
+
+TamaMedics.com remains static research documentation. <code>uni.tamamedics.com</code> is a proposed future service hostname only; no service is operating there on behalf of this project. We will evaluate hosting only after trust, routing, and protocol feasibility are established. Long-running transports, identity, persistent state, and backups may need hosting beyond ordinary static SiteGround service.
+</section>
+
+<section id="uni-roadmap">
+## Roadmap and acceptance gates
+
+### P0 — Preservation inventory · In progress
+
+Consolidate official documentation, public release notes, known firmware versions, dependencies, and community research. **Accepted when:** each inventory claim has a source, verification date, confidence label, and named evidence gap; inaccessible sources and unknown versions remain explicit. This hub starts the inventory; it does not complete it.
+
+### P1 — Safe network baseline · Planned
+
+Confirm hardware capabilities before preparing an isolated 2.4GHz network for our own Uni. Preferred topology, if supported: Xfinity LAN → Pi Ethernet uplink → Pi Wi-Fi AP → Uni; the Mac reviews evidence. Evaluate the spare Nighthawk if needed. No Mac Ethernet adapter is required.
+
+**Accepted when:** topology and rollback are approved, the capture interface demonstrably carries only intended device traffic, and a private, hashed record associates DNS/destination/port/timing and observable TLS metadata with one normal user action at a time. Capture limitations and repetitions must be recorded.
+
+### P2 — Protocol and trust investigation · Planned
+
+Build the endpoint inventory and test approved, benign hypotheses in isolation. **Accepted when:** every endpoint has dated evidence and firmware context; passive-capture limits, unresolved authentication rules, and failed compatibility hypotheses are documented. A blocked trust path is a valid research result.
+
+### P3 — Service behavior specification · Planned
+
+Describe operations, data relationships, errors, and state transitions in a versioned specification. **Accepted when:** each observed contract traces to redacted evidence, proposed fields are marked as proposals, and another researcher can reproduce the documented behavior.
+
+### P4 — Local service prototype · Planned
+
+Build isolated components only after protocol and trust feasibility are better understood. Start with fabricated fixtures. **Accepted when:** local tests reproduce a clearly scoped proposed contract without official credentials, public exposure, or a claim of device compatibility.
+
+### P5 — Stock-device compatibility evaluation · Planned
+
+Use our own hardware for separately approved, reversible experiments when a safe method exists. **Accepted when:** a documented end-to-end operation repeats successfully, normal operation can be restored, and firmware coverage and failure modes are published. No irreversible device change is part of this baseline.
+
+### P6 — Community-hosted service · Conditional
+
+Consider public hosting only after feasibility. **Accepted when:** authentication, security isolation, abuse prevention, data minimization, governance, operational ownership, durable backups, restore testing, costs, maintenance, and terms review have explicit decisions. Public hosting requires separate approval.
+
+The [engineering documentation](https://github.com/simplycole/tamamedics.com) will be available in the repository under <code>docs/uni-revival/</code> after the reviewed changes are published. It includes the inventory, protocol matrix, evidence template, capture runbook, and hosting decision matrix.
+</section>
+
+<section id="uni-contribute">
+## Help preserve the Uni
+
+<Callout variant="status" label="Contributors welcome">
+Help turn an open question into a reproducible finding. Share public sources, careful corrections, or a small experiment with enough context for someone else to evaluate it.
+</Callout>
+
+Useful contributions include:
+
+- Official technical material, historical screenshots, public release notes, and documentation.
+- Non-sensitive endpoint or protocol observations with date, firmware version, method, and limitations.
+- Firmware-version information without binaries; regional feature and event differences.
+- Original research, reproducible tests, and corrections to this inventory.
+- Developer collaboration on compatible service behavior after evidence supports a specification.
+
+Use [TamaMedics GitHub Issues](https://github.com/simplycole/tamamedics.com/issues), the existing public repository's enabled issue tracker. Put **TM-RP-002** in the title and explain the observation, expected behavior, actual result, confidence, competing explanations, and reproduction steps. Read the [contribution guidelines](/contributing/) first. This is a public channel.
+
+**Do not post** device authentication credentials, tokens, passwords, personal identifiers, private certificates or keys, one-time ticket/download codes, raw captures containing sensitive traffic, copyrighted firmware images, or commercial/paid DLC payloads without authorization. Summarize findings in redacted text; keep raw evidence private. If a finding cannot be shared safely, describe the question without attaching the material.
+</section>
+
+<section id="uni-log">
+## Research log
+
+**October 25, 2026 — Public-source research and documentation preparation.** Reviewed public architecture and licensing sources, compared historical community reports, documented source-access limits, prepared this research hub, and wrote engineering references and a capture-planning runbook. No device traffic was captured, private API response decoded, firmware decrypted, or replacement service launched.
+
+**October 26, 2026 — Initial preservation research and public project launch preparation.** Integrated both research cases into the static site, verified the production route and internal anchors, and checked responsive and keyboard behavior in local Chrome. The hub and engineering documentation are prepared for review and manual publication. No device capture or service implementation has occurred.
+</section>
+
+<section id="uni-references">
+## References and source limits
+
+Source review: **October 25, 2026**. Some official URLs returned a maintenance notice on direct retrieval. Indexed official text is identified below; it is not a live service test. Website maintenance does not establish device-service shutdown.
+
+- <span id="ref-aws">**Official / architecture:**</span> Shota Iizuka, AWS, August 29, 2023: [Efficiently managing millions of Tamagotchi devices with AWS IoT](https://aws.amazon.com/blogs/iot/efficiently-managing-millions-of-tamagotchi-devices-with-aws-iot/). Architecture and firmware-distribution sections reviewed.
+- <span id="ref-oss">**Official / component attribution:**</span> Bandai, [Uni open-source notices](https://tamagotchi-official.com/legalinfo/toy/uni/). Component list reviewed; no protocol inference from licenses alone.
+- **Official / support period:** Bandai, [Uni Pink product information](https://tamagotchi-official.com/us/series/uni/item/01_1/). Indexed official security-support text reviewed. The [UK PSTI statement](https://tamagotchi-official.com/manual/toy/uni/Uni_PSTI_statement_of_compliance.pdf) also lists a minimum support period for its covered UK products; indexed text reviewed, PDF rendering unavailable.
+- **Official / setup reference:** [Uni FAQ](https://tamagotchi-official.com/us/series/uni/faq/) and [manuals](https://tamagotchi-official.com/manual/toy/uni/). Both returned maintenance; detailed instructions require re-review.
+- <span id="ref-shop">**Official / content delivery:**</span> [Tamagotchi Ticket Shop](https://ticketshop.tamagotchi-official.com/). Public download and Tama Portal instructions reviewed; no login, purchase, or code redemption performed.
+- **Official / September content:** [LOGGER announcement](https://tamagotchi-official.com/us/news/01_1625/). September 14, 2026 availability and Wi-Fi requirement reviewed.
+- **Official / October content:** [PANDA announcement](https://tamagotchi-official.com/us/news/01_1676/). October 1, 2026 availability in indexed official text; direct retrieval returned maintenance.
+- <span id="ref-arena">**Official / event behavior:**</span> [BUNNY JUMP 2026](https://tamagotchi-official.com/us/series/uni/news/01_1636/), September 10, 2026. Event, calculation, and reward windows in indexed official text; direct retrieval returned maintenance.
+- **Community / historical:** Zhongtiao1 and contributors, [GBAtemp Uni Research/Hacking](https://gbatemp.net/threads/tamagotchi-uni-research-hacking.636515/), 2023 opening observations. Not independently reproduced here.
+- **Community / hardware:** N4A_System_01ki and contributors, [GBAtemp research reborn](https://gbatemp.net/threads/tamagotchi-uni-the-research-reborn-or-well-updated.684334/), September 2026 discussion. Not independently reproduced here.
+- **Community / open source:** Maciej Mensfeld and contributors, [hotspotchi](https://github.com/mensfeld/hotspotchi). Public repository description reviewed; no installation or compatibility validation performed.
+</section>
+
+<section id="uni-policy">
+## Independent preservation, responsible sharing
+
+TamaMedics is an independent preservation initiative, unaffiliated with Bandai. Tamagotchi and related trademarks belong to their respective owners and are used for identification and commentary.
+
+We do not distribute proprietary firmware, copyrighted vendor assets, or paid content. Research uses lawful public documentation, redacted observations, original tools, and fabricated fixtures. We will not bypass device/account access controls or seek other users' data. Hardware testing begins with normal behavior on our own device, without reset, firmware changes, fuse changes, or credential extraction.
+</section>

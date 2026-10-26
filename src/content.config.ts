@@ -15,6 +15,10 @@ const research = defineCollection({
     category: z.string(),
     confidence: evidence,
     tags: z.array(z.string()).default([]),
+    toc: z.array(z.object({
+      href: z.string().regex(/^#[a-z][a-z0-9-]*$/),
+      label: z.string().min(1),
+    })).min(1),
     published: z.coerce.date().optional(),
     updated: z.coerce.date().optional(),
   }),
